@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         binding.simpleService.setOnClickListener{
-            startService(MyService.newIntent(this))
+            startService(MyService.newIntent(this,25))
         }
     }
 }
