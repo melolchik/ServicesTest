@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         binding.simpleService.setOnClickListener{
+            stopService(MyForegroundService.newIntent(this))
             startService(MyService.newIntent(this,25))
         }
         binding.foregroundService.setOnClickListener{

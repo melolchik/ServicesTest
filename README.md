@@ -11,3 +11,7 @@ startForegroundService - то же, что и startService, но при его �
 <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 + нужна проверка разрешений
+
+# 9.5 Остановка сервисов
+stopSelf - внутри сервиса
+stopService(MyForegroundService.newIntent(this)) снаружи
