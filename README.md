@@ -42,3 +42,15 @@ jobFinished(params, true) - остановка сервиса, второй па
 Если сами завершаем работу сервиса, метод не вызовется, т.е если сервис система
 возвращает //= false, не нужно перезапускать
            //= true, нужно перезапустить
+
+#9.8 JobScheduler. Запуск сервиса
+
+<service
+            android:name=".MyJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" /> - в манифесте
+
+.setPersisted(true) - сервис запускается после перезагрузки устройства
+.setPeriodic() сервис выполняется раз в период, не обязательно ровно через этот период
+.setRequiresCharging(true) - при включенной зарядке
+.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED) - при включенном вай-фай
