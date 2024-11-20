@@ -30,3 +30,15 @@ stopService(MyForegroundService.newIntent(this)) снаружи
 		false - аналог START_NOT_STICKY
          */
  setIntentRedelivery(true)
+
+#9.7 JobService. Создание сервиса
+     onStartJob(params: JobParameters?): Boolean
+возвращает //sync = false, работа завершена
+           //async = true, работа не завершена
+
+jobFinished(params, true) - остановка сервиса, второй параметр = true, если нужно перезапустить сервис через какое-то время
+
+	onStopJob(params: JobParameters?): Boolean - вызывается при опред.условиях,( например отключили от зарядки, от wi-fi)
+Если сами завершаем работу сервиса, метод не вызовется, т.е если сервис система
+возвращает //= false, не нужно перезапускать
+           //= true, нужно перезапустить
