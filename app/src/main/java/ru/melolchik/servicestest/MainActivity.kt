@@ -56,10 +56,12 @@ class MainActivity : AppCompatActivity() {
                 .build()
             val jobScheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val intent = MyJobService.newIntent(page++)
-                jobScheduler.enqueue(jobInfo, JobWorkItem(intent))
-            }
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                val intent = MyJobService.newIntent(page++)
+//                jobScheduler.enqueue(jobInfo, JobWorkItem(intent))
+//            }else{
+                startService(MyIntentServiceBeforeO.newIntent(this, page++))
+            //}
         }
     }
 
