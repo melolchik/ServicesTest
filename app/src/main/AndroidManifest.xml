@@ -30,6 +30,10 @@
             android:name=".MyForegroundService"
             android:foregroundServiceType="shortService"
             android:stopWithTask="false" />
+        <service
+            android:name=".MyIntentService"
+            android:foregroundServiceType="shortService"
+            android:stopWithTask="false" />
     </application>
 
 </manifest>
