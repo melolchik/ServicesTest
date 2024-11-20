@@ -54,3 +54,7 @@ jobFinished(params, true) - остановка сервиса, второй па
 .setPeriodic() сервис выполняется раз в период, не обязательно ровно через этот период
 .setRequiresCharging(true) - при включенной зарядке
 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED) - при включенном вай-фай
+
+#9.9 JobScheduler. Метод enqueue
+
+PersistableBundle - бандл, который содержит примитивы и строки, которые можно хранить на диске
