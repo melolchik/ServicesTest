@@ -78,3 +78,5 @@ ExistingWorkPolicy.REPLACE - существующий воркер будет з
 ExistingWorkPolicy.KEEP - существующий продолжит работу, а новый будет проигнорирован
 ExistingWorkPolicy.APPEND - новый воркер будет добавлен в очередь, в случае ошибки - она распространится дальше
 ExistingWorkPolicy.APPEND_OR_REPLACE - новый воркер будет добавлен в очередь, в случае ошибке будет создана новая цепочка
+
+#9.13 Debug приложение с WorkManager-ом

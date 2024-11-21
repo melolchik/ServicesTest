@@ -24,6 +24,9 @@ import ru.melolchik.servicestest.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    private val workManager by lazy {
+        WorkManager.getInstance(applicationContext)
+    }
     private var page = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.workManager.setOnClickListener {
-            val workManager = WorkManager.getInstance(applicationContext)
+
             workManager.enqueueUniqueWork(
                 MyWorker.WORK_NAME,
                 ExistingWorkPolicy.APPEND,
