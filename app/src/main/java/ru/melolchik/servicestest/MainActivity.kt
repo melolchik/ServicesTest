@@ -17,10 +17,12 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.work.ExistingWorkPolicy
+import androidx.work.WorkManager
 import ru.melolchik.servicestest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     private var page = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,21 +35,25 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        binding.simpleService.setOnClickListener{
+        binding.simpleService.setOnClickListener {
             stopService(MyForegroundService.newIntent(this))
-            startService(MyService.newIntent(this,25))
+            startService(MyService.newIntent(this, 25))
         }
-        binding.foregroundService.setOnClickListener{
-            ContextCompat.startForegroundService(this,
-                MyForegroundService.newIntent(this))
+        binding.foregroundService.setOnClickListener {
+            ContextCompat.startForegroundService(
+                this,
+                MyForegroundService.newIntent(this)
+            )
         }
-        binding.intentService.setOnClickListener{
-            ContextCompat.startForegroundService(this,
-                MyIntentService.newIntent(this))
+        binding.intentService.setOnClickListener {
+            ContextCompat.startForegroundService(
+                this,
+                MyIntentService.newIntent(this)
+            )
         }
 
-        binding.jobScheduler.setOnClickListener{
-            val componentName = ComponentName(this,MyJobService::class.java)
+        binding.jobScheduler.setOnClickListener {
+            val componentName = ComponentName(this, MyJobService::class.java)
             val jobInfo = JobInfo.Builder(MyJobService.JOB_ID, componentName)
                 //.setExtras(MyJobService.newBundle(page++))
                 //.setRequiresCharging(true)
@@ -59,13 +65,22 @@ class MainActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val intent = MyJobService.newIntent(page++)
                 jobScheduler.enqueue(jobInfo, JobWorkItem(intent))
-            }else{
+            } else {
                 startService(MyIntentServiceBeforeO.newIntent(this, page++))
             }
         }
 
-        binding.jobIntentService.setOnClickListener{
-            MyJobIntentService.enqueue(this,page++)
+        binding.jobIntentService.setOnClickListener {
+            MyJobIntentService.enqueue(this, page++)
+        }
+
+        binding.workManager.setOnClickListener {
+            val workManager = WorkManager.getInstance(applicationContext)
+            workManager.enqueueUniqueWork(
+                MyWorker.WORK_NAME,
+                ExistingWorkPolicy.APPEND,
+                MyWorker.makeRequest(page++)
+            )
         }
     }
 

@@ -71,3 +71,10 @@ enqueue работает с версии О (26)
 А IntentService выполняется последовательно, и в версии ниже 26 можно использовать его
 
 #9.11 JobIntentService
+
+#9.12 WorkManager
+
+ExistingWorkPolicy.REPLACE - существующий воркер будет заменён
+ExistingWorkPolicy.KEEP - существующий продолжит работу, а новый будет проигнорирован
+ExistingWorkPolicy.APPEND - новый воркер будет добавлен в очередь, в случае ошибки - она распространится дальше
+ExistingWorkPolicy.APPEND_OR_REPLACE - новый воркер будет добавлен в очередь, в случае ошибке будет создана новая цепочка
